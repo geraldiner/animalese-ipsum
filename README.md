@@ -1,19 +1,39 @@
-# animalese-ipsum
+# Animalese Ipsum Generator
 
-## Project setup
-```
-npm install
-```
+A Lorem Ipsum Generator based on the catchphrases from Animal Crossing: New Horizons characters.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Project Links
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Coming soon
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## How It's Made
+
+**Tech used:** HTML, CSS, JavaScript, Vue
+
+## Optimizations
+
+## Lessons Learned
+
+## Other Projects
+
+Check out other stuff I've worked on:
+
+**Minute To Win It Games API & Wiki**: https://github.com/geraldiner/min-to-win
+
+**Rehabitter:** https://github.com/geraldiner/rehabitter
+
+**Snapchat Clone:** https://github.com/geraldiner/snapchat-clone
+
+**K.K. Radio:** https://github.com/geraldiner/kk-radio
+
+## Let's Connect!
+
+Let's talk about self-taught programming, experience design, (computer science) education, and/or Animal Crossing:
+
+**Twitter**: [@GeraldineDesu](https://twitter.com/geraldinedesu)
+
+**LinkedIn**: [in/GeraldineR](https://linkedin.com/in/geraldiner)
+
+**Email**: hello [at] geraldiner [dot] com
+
+I'm also looking for new Full-Stack or Front-End opportunities, so please reach out if you'd like to work together!
