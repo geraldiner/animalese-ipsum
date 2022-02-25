@@ -3,7 +3,14 @@
     <section class="p-count">
       <h6>Number of Paragraphs:</h6>
       <label for="p-count">
-        <input id="p-count" type="number" :value="options.pCount" />
+        <input
+          @change="updatePCount"
+          id="p-count"
+          type="number"
+          min="1"
+          max="10"
+          :value="options.pCount"
+        />
         <section class="p-count-nav">
           <span @click="increment" class="p-count-button p-count-up">+</span>
           <span @click="decrement" class="p-count-button p-count-down">-</span>
@@ -76,10 +83,18 @@ export default {
   },
   methods: {
     increment() {
+      if (this.options.pCount >= 10) return;
       this.options.pCount += 1;
+      this.$emit("on-change");
     },
     decrement() {
+      if (this.options.pCount <= 0) return;
       this.options.pCount -= 1;
+      this.$emit("on-change");
+    },
+    updatePCount(e) {
+      e.preventDefault();
+      this.options.pCount = Number(e.target.value);
     },
     onSubmit(e) {
       e.preventDefault();
