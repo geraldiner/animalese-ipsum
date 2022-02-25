@@ -1,126 +1,71 @@
 <template>
-  <h1>Animalese Ipsum Generator</h1>
-  <h3>Animal Crossing-themed Lorem Ipsum Generator</h3>
-  <form @submit="generateIpsum" id="options">
-    <section class="p-count">
-      <label for="p-count">
-        <input @change="setPCount" id="p-count" type="number" :value="pCount" />
-        Paragraphs
-        <section class="p-count-nav">
-          <span @click="increment" class="p-count-button p-count-up">+</span>
-          <span @click="decrement" class="p-count-button p-count-down">-</span>
-        </section>
-      </label>
-    </section>
-
-    <section class="p-length">
-      <label for="p-length-long">
-        <input
-          @click="setPLength"
-          id="p-length-long"
-          type="radio"
-          name="long"
-          value="long"
-          checked
-          v-model="pLength"
-        />
-        Long
-      </label>
-      <label for="p-length-medium">
-        <input
-          @click="setPLength"
-          id="p-length-medium"
-          type="radio"
-          name="p-length"
-          value="medium"
-          v-model="pLength"
-        />
-        Medium
-      </label>
-      <label for="p-length-small">
-        <input
-          @click="setPLength"
-          id="p-length-small"
-          type="radio"
-          name="p-length"
-          value="short"
-          v-model="pLength"
-        />
-        Short
-      </label>
-    </section>
-    <section class="extras">
-      <label for="">
-        <input type="checkbox" id="" /> Something something extra
-      </label>
-      <label for="">
-        <input type="checkbox" id="" /> Other something extra
-      </label>
-    </section>
-    <section class="submit">
-      <button type="submit">Submit</button>
-    </section>
-  </form>
-  <section class="result" v-for="(p, i) in paragraphs" :key="i">
-    <p>{{ p }}</p>
-  </section>
+  <div class="container">
+    <Header />
+    <OptionsForm @on-change="onChange" @send-options="generateIpsum" />
+    <GeneratedResult v-show="paragraphs.length > 0" :paragraphs="paragraphs" />
+  </div>
 </template>
 
 <script>
+import Header from "./components/Header.vue";
+import OptionsForm from "./components/OptionsForm.vue";
+import GeneratedResult from "./components/GeneratedResult.vue";
+
 export default {
   name: "App",
+  components: {
+    Header,
+    OptionsForm,
+    GeneratedResult,
+  },
   data() {
     return {
       paragraphs: [],
-      pCount: 5,
-      pLength: "long",
-      allowedSentencesRanges: {
-        long: [12, 15],
-        medium: [6, 11],
-        short: [3, 5],
-      },
-      catchphrases: [],
     };
   },
   methods: {
-    async generateIpsum(e) {
-      e.preventDefault();
-      const data = await this.fetchCatchphrases();
-      data.shift();
-      this.catchphrases = data;
+    onChange() {
+      this.paragraphs = [];
+    },
+    async generateIpsum(options) {
+      const { pCount, pLength } = options;
+      const catchphrases = await this.fetchCatchphrases();
+      catchphrases.shift();
 
       const paras = [];
-      for (let i = 0; i < this.pCount; i++) {
-        paras.push(this.generateParagraph());
+      for (let i = 0; i < pCount; i++) {
+        paras.push(this.generateParagraph(catchphrases, pLength));
       }
       this.paragraphs = paras;
     },
-    generateParagraph() {
+    generateParagraph(catchphrases, pLength) {
+      const allowedSentencesRanges = {
+        long: [12, 15],
+        medium: [6, 11],
+        short: [3, 5],
+      };
       let sentences = [];
-      const min = this.allowedSentencesRanges[this.pLength][0];
-      const max = this.allowedSentencesRanges[this.pLength][1];
-      const sentenceCount = Math.floor(min + (max - min) * Math.random());
+      const min = allowedSentencesRanges[pLength][0];
+      const max = allowedSentencesRanges[pLength][1];
+      const sentenceCount = this.getRandomNum(min, max);
       for (let i = 0; i < sentenceCount; i++) {
-        sentences.push(this.generateSentence());
+        sentences.push(this.generateSentence(catchphrases));
       }
       return sentences.join(" ");
     },
-    generateSentence() {
+    generateSentence(catchphrases) {
       let words = [];
-      const min = 5;
-      const max = 10;
-      const wordCount = Math.floor(min + (max - min) * Math.random());
+
+      const wordCount = this.getRandomNum(5, 10);
       for (let i = 0; i < wordCount; i++) {
-        let index = Math.floor(this.catchphrases.length * Math.random());
-        words.push(this.catchphrases[index]);
+        let index = Math.floor(catchphrases.length * Math.random());
+        words.push(catchphrases[index]);
       }
+      words[0] = words[0][0].toUpperCase() + words[0].slice(1);
       return words.join(" ") + ".";
     },
-    increment() {
-      this.pCount += 1;
-    },
-    decrement() {
-      this.pCount -= 1;
+    getRandomNum(min, max) {
+      return Math.floor(min + (max - min) * Math.random());
     },
     async fetchCatchphrases() {
       const res = await fetch(

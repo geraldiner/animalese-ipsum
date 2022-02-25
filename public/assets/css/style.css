@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@700&family=Varela+Round&display=swap");
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -6,77 +8,20 @@
 
 html,
 body {
-	background-color: #fcf5d3;
+	--light-cream: #fdf8e3;
+	font-family: "Hind", "Roboto", "Helvetica", sans-serif;
+	background: #edf0f3;
+	background-image: url("../img/animal-crossing-background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	min-height: 100vh;
 }
 
 p {
 	margin: 25px 0;
 }
 
-.p-count {
-	position: relative;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-input[type="number"] {
-	-moz-appearance: textfield;
-}
-
-.p-count input {
-	width: 75px;
-	height: 42px;
-	line-height: 1.65;
-	float: left;
-	display: block;
-	padding: 0;
-	margin: 0;
-	padding-left: 20px;
-	border: 1px solid #eee;
-}
-
-.p-count input:focus {
-	outline: 0;
-}
-
-.p-count-nav {
-	float: left;
-	position: relative;
-	height: 42px;
-}
-
-.p-count-button {
-	position: relative;
-	cursor: pointer;
-	border-left: 1px solid #eee;
-	width: 20px;
-	text-align: center;
-	color: #333;
-	font-size: 13px;
-	font-family: "Trebuchet MS", Helvetica, sans-serif !important;
-	line-height: 1.7;
-	-webkit-transform: translateX(-100%);
-	transform: translateX(-100%);
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-}
-
-.p-count-button.p-count-up {
-	position: absolute;
-	height: 50%;
-	top: 0;
-	border-bottom: 1px solid #eee;
-}
-
-.p-count-button.p-count-down {
-	position: absolute;
-	bottom: -1px;
-	height: 50%;
+section {
+	margin-bottom: 1rem !important;
 }
