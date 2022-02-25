@@ -19,6 +19,7 @@ export default {
   padding: 25px;
   word-wrap: break-word;
   border-radius: 8px;
+  box-shadow: 2px 2px 2px 2px #41220b;
 }
 
 .result p {
