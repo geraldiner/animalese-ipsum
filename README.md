@@ -5,10 +5,6 @@ A Lorem Ipsum Generator based on the catchphrases from Animal Crossing: New Hori
 ### Project Links
 
 Live link: https://animalese-ipsum.netlify.app
-
-
-
-
 ## 🚀 Other Projects
 
 Check out other stuff I've worked on:
